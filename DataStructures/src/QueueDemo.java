@@ -1,4 +1,4 @@
-import queue.*;
+import queue.ArrayBndQueue;
 
 import java.util.Scanner;
 
@@ -6,7 +6,7 @@ public class QueueDemo {
 
     public static final Scanner read = new Scanner(System.in);
 
-    public static void main(String []argv) {
+    public static void main(String[] argv) {
         ArrayBndQueue<Integer> q = new ArrayBndQueue<>();
         q.enqueue(9);
         q.enqueue(-5);
@@ -36,7 +36,7 @@ public class QueueDemo {
 
     public static <T> void readQueue(ArrayBndQueue<T> q) {
         while (!q.isFull()) {
-            q.enqueue((T)read.next());
+            q.enqueue((T) read.next());
         }
     }
 

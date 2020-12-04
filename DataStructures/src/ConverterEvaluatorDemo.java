@@ -1,8 +1,7 @@
-import stack.*;
-import java.lang.Math;
+import stack.ArrayStack;
 
 public class ConverterEvaluatorDemo {
-    public static void main(String []argv) {
+    public static void main(String[] argv) {
 
         // converter demo
         System.out.printf("enter string in infix notation: ");
@@ -23,13 +22,13 @@ public class ConverterEvaluatorDemo {
 
     public static double evaluatePrefix(String prefixExpression) {
 
-        ArrayStack<Double> numbers = new ArrayStack<>(prefixExpression.length()/2);
+        ArrayStack<Double> numbers = new ArrayStack<>(prefixExpression.length() / 2);
 
         for (String entry :
             getEntriesFromExpressionString(prefixExpression)) {
 
             if (isNumber(entry)) {
-                numbers.push( Double.parseDouble(entry));
+                numbers.push(Double.parseDouble(entry));
             }
             if (isOperator(entry)) {
                 final double firstOperand = numbers.top();
@@ -50,13 +49,13 @@ public class ConverterEvaluatorDemo {
 
     public static double evaluatePostfix(String postfixExpression) {
 
-        ArrayStack<Double> numbers = new ArrayStack<>(postfixExpression.length()/2);
+        ArrayStack<Double> numbers = new ArrayStack<>(postfixExpression.length() / 2);
 
         for (String entry :
-             getEntriesFromExpressionString(postfixExpression)) {
+            getEntriesFromExpressionString(postfixExpression)) {
 
             if (isNumber(entry)) {
-                numbers.push( Double.parseDouble(entry));
+                numbers.push(Double.parseDouble(entry));
             }
             if (isOperator(entry)) {
                 final double secondOperand = numbers.top();
@@ -76,7 +75,7 @@ public class ConverterEvaluatorDemo {
     }
 
     // keep scrolling blyat
-    private static String []getEntriesFromExpressionString(String expression) {
+    private static String[] getEntriesFromExpressionString(String expression) {
         // replace additional whitespaces with single whitespace
         expression = expression.replaceAll("\\s+", " ");
         // add entries to an array to process them one by one
@@ -90,17 +89,17 @@ public class ConverterEvaluatorDemo {
     public static String convertInfix2Postfix(String expression) {
 
         // add braces to the expression
-        String []entries =
+        String[] entries =
             getEntriesFromExpressionString(String.format("( %s )", expression));
         // operators stack
-        ArrayStack<Character> operators = new ArrayStack<>(entries.length/2);
+        ArrayStack<Character> operators = new ArrayStack<>(entries.length / 2);
         // hmm
         String postfixExpression = "";
 
         // process entries
-        for(String entry : entries) {
+        for (String entry : entries) {
             // alphabet if you're crazy :)
-            if (isNumber(entry) || Character.isAlphabetic(entry.charAt(0)) ) {
+            if (isNumber(entry) || Character.isAlphabetic(entry.charAt(0))) {
                 postfixExpression += String.format(" %s", entry);
 
             } else if (isParenth(entry)) {
@@ -109,9 +108,9 @@ public class ConverterEvaluatorDemo {
 
                 } else if (entry.equals(")")) {
 
-                    while ( !operators.top().equals('(') && !operators.isEmpty()) {
-                        if( !operators.top().equals(')') || !operators.top().equals(')') ) {
-                            postfixExpression += String.format(" %s",operators.top());
+                    while (!operators.top().equals('(') && !operators.isEmpty()) {
+                        if (!operators.top().equals(')') || !operators.top().equals(')')) {
+                            postfixExpression += String.format(" %s", operators.top());
                         }
                         operators.pop();
                     }
@@ -195,11 +194,11 @@ public class ConverterEvaluatorDemo {
 
     private static double execOperator(double rightOperand, double leftOperand, char op) {
         // sorry, c++ habits ;)
-        return (op == '+')? rightOperand + leftOperand:
-            (op == '-')? rightOperand - leftOperand:
-                (op == '*')? rightOperand * leftOperand:
-                    (op == '/')? rightOperand / leftOperand:
-                        (op == '^')? Math.pow(rightOperand, leftOperand):
+        return (op == '+') ? rightOperand + leftOperand :
+            (op == '-') ? rightOperand - leftOperand :
+                (op == '*') ? rightOperand * leftOperand :
+                    (op == '/') ? rightOperand / leftOperand :
+                        (op == '^') ? Math.pow(rightOperand, leftOperand) :
                             0;
     }
 

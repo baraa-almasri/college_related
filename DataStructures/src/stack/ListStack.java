@@ -3,8 +3,8 @@ package stack;
 import java.util.ArrayList;
 
 public class ListStack<T> implements UnboundedStack<T> {
-    private int topIndex;
     private final ArrayList<T> stack;
+    private int topIndex;
 
     public ListStack() {
         this.topIndex = -1;
@@ -17,7 +17,7 @@ public class ListStack<T> implements UnboundedStack<T> {
     }
 
     public void pop() {
-        if(this.topIndex > -1) {
+        if (this.topIndex > -1) {
             this.stack.remove(this.topIndex--);
 
         } else {
@@ -26,7 +26,7 @@ public class ListStack<T> implements UnboundedStack<T> {
     }
 
     public T top() {
-        if(this.topIndex == -1) {
+        if (this.topIndex == -1) {
             throw new StackUnderflowException("empty stack");
         }
 
