@@ -1,11 +1,10 @@
-
 import stack.*;
-import java.util.Scanner;
 import java.lang.Math;
 
-public class ShittyConvertersEvaluatorsDemo {
+public class ConverterEvaluatorDemo {
     public static void main(String []argv) {
-        Scanner read = new Scanner(System.in);
+
+        // converter demo
         System.out.printf("enter string in infix notation: ");
         // examples to try :)
         // ( ( 1 + ( 2.9 * 8 ) ) / ( 2 - 3 ) )
@@ -14,20 +13,12 @@ public class ShittyConvertersEvaluatorsDemo {
         //  ( 24 * ( 1 * ( ( ( 4 + 5 ) + 5 ) * 66 ) ) )
         // ( ( 33 * ( ( ( ( 12 + ( ( 1 + 12 ) * 4 ) ) * 1 ) * 3 ) * 12 ) ) + 4 )
         // ( ( 2 + 1 ) / 3 ) + 1 / 2
-        String infix = read.nextLine();
 
         //System.out.printf("postfix: %s\n", convertInfix2Postfix("A + B"));
-        System.out.printf("postfix: %s\n", convertInfix2Postfix(infix));
+        System.out.printf("postfix: %s\n", convertInfix2Postfix("( 12 + ( 69 * 4 ) )"));
 
-    }
-
-    private static double execOperator(double rightOperand, double leftOperand, char op) {
-        // sorry, c++ habits :)
-        return (op == '+')? rightOperand + leftOperand:
-           (op == '-')? rightOperand - leftOperand:
-           (op == '*')? rightOperand * leftOperand:
-           (op == '/')? rightOperand / leftOperand:
-           (op == '^')? Math.pow(rightOperand, leftOperand): 0;
+        // evaluator demo
+        System.out.println(evaluatePostfix("33 12 1 12 + 4 * + 1 * 3 * 12 * * 4 +"));
     }
 
     public static double evaluatePrefix(String prefixExpression) {
@@ -86,8 +77,6 @@ public class ShittyConvertersEvaluatorsDemo {
 
     // keep scrolling blyat
     private static String []getEntriesFromExpressionString(String expression) {
-        // add braces to the expression :)
-        expression = String.format("( %s )", expression);
         // replace additional whitespaces with single whitespace
         expression = expression.replaceAll("\\s+", " ");
         // add entries to an array to process them one by one
@@ -95,10 +84,15 @@ public class ShittyConvertersEvaluatorsDemo {
         return expression.split("\\s");
     }
 
+    // needs checking :)
+    // if you're really interested, go to:
+    // https://github.com/baraa-almasri/math_related/blob/master/ExpressionToolbox/ExpressionConverter.kt
     public static String convertInfix2Postfix(String expression) {
 
-        String []entries = getEntriesFromExpressionString(expression);
-        // operators stack ;)
+        // add braces to the expression
+        String []entries =
+            getEntriesFromExpressionString(String.format("( %s )", expression));
+        // operators stack
         ArrayStack<Character> operators = new ArrayStack<>(entries.length/2);
         // hmm
         String postfixExpression = "";
@@ -139,6 +133,13 @@ public class ShittyConvertersEvaluatorsDemo {
                     postfixExpression += String.format(" %s", operators.top());
                     operators.pop();
                     operators.push(entry.charAt(0));
+
+                } else if (getOperatorPrecedence(entry.charAt(0)) ==
+                    getOperatorPrecedence(operators.top())) {
+                    postfixExpression += String.format(" %s", operators.top());
+                    operators.pop();
+                    operators.push(entry.charAt(0));
+
                 }
             }
         }
@@ -191,4 +192,15 @@ public class ShittyConvertersEvaluatorsDemo {
 
         return 0;
     }
+
+    private static double execOperator(double rightOperand, double leftOperand, char op) {
+        // sorry, c++ habits ;)
+        return (op == '+')? rightOperand + leftOperand:
+            (op == '-')? rightOperand - leftOperand:
+                (op == '*')? rightOperand * leftOperand:
+                    (op == '/')? rightOperand / leftOperand:
+                        (op == '^')? Math.pow(rightOperand, leftOperand):
+                            0;
+    }
+
 }
