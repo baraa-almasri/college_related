@@ -1,11 +1,11 @@
 package queue;
 
 public class ArrayBndQueue<T> implements BoundedQueueInterface<T> {
-    protected final int DEFCAP = 100; // default capacity
-    protected T[] queue;              // array that holds queue elements
-    protected int numElements = 0;    // number of elements in the queue
-    protected int front = 0;          // index of front of queue
-    protected int rear;               // index of rear of queue
+    protected final int DEFCAP = 100;
+    protected T[] queue;
+    protected int numElements = 0;
+    protected int front = 0;
+    protected int rear;
 
     public ArrayBndQueue() {
         queue = (T[]) new Object[DEFCAP];
@@ -25,9 +25,9 @@ public class ArrayBndQueue<T> implements BoundedQueueInterface<T> {
         if (isFull())
             throw new QueueOverflowException("Enqueue on a full queue.");
         else {
-            rear = (rear + 1) % queue.length; // used for Wrapping
+            rear = (rear + 1) % queue.length;
             queue[rear] = element;
-            numElements = numElements + 1;
+            numElements++;
         }
     }
 
@@ -38,7 +38,7 @@ public class ArrayBndQueue<T> implements BoundedQueueInterface<T> {
             T toReturn = queue[front];
             queue[front] = null;
             front = (front + 1) % queue.length;
-            numElements = numElements - 1;
+            numElements--;
             return toReturn;
         }
     }

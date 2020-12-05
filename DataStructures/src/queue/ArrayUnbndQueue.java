@@ -1,12 +1,12 @@
 package queue;
 
 public class ArrayUnbndQueue<T> implements UnboundedQueueInterface<T> {
-    protected final int DEFCAP = 100; // default capacity
-    protected T[] queue;              // array that holds queue elements
-    protected int origCap;            // original capacity
-    protected int numElements = 0;    // number of elements n the queue
-    protected int front = 0;          // index of front of queue
-    protected int rear = -1;          // index of rear of queue
+    protected final int DEFCAP = 100;
+    protected T[] queue;
+    protected int origCap;
+    protected int numElements = 0;
+    protected int front = 0;
+    protected int rear = -1;
 
     public ArrayUnbndQueue() {
         queue = (T[]) new Object[DEFCAP];
