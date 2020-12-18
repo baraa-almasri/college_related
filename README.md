@@ -1,2 +1,2 @@
 # college_related
-Programs written in college courses
+Programs written corresponding to college courses topics
