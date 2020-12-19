@@ -3,21 +3,11 @@ package kmap;
 public class Driver {
     public static void main(String[] argv) {
         boolean kmap[] = {true, true, true, false};
-        TwoVarsKMap SoMKMap = new TwoVarsKMap(kmap);
-        System.out.println(SoMKMap.getSimplifiedBooleanFunction());
-    }
-
-}
-
-
-
-
-
-
-
-
-
-
+        TwoVarsKMapExtractor SoMKMap = new TwoVarsKMapExtractor(kmap);
+        System.out.println(SoMKMap.getSoMBooleanFunction());
+        System.out.println(SoMKMap.getSimplifiedSoMBooleanFunction());
+        System.out.println(SoMKMap.getPoMBooleanFunction());
+        System.out.println(SoMKMap.getSimplifiedPoMBooleanFunction());
         /*
         // SoM KMap for each term
         HashMap<Integer, String> kmapSoM = new HashMap<>(4);
@@ -118,7 +108,6 @@ public class Driver {
         }
 
         System.out.println(f.exists());
-    }
+*/    }
 
 }
-*/
