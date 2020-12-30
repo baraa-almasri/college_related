@@ -55,6 +55,7 @@ public class ArrayUnsortedList<T> implements ListInterface<T> {
         }
     }
 
+    @Override
     public void add(T element)
     // Adds element to this list.
     {
@@ -64,6 +65,7 @@ public class ArrayUnsortedList<T> implements ListInterface<T> {
         numElements++;
     }
 
+    @Override
     public boolean remove(T element)
     // Removes an element e from this list such that e.equals(element)
     // and returns true; if no such element exists, returns false.
@@ -77,12 +79,14 @@ public class ArrayUnsortedList<T> implements ListInterface<T> {
         return found;
     }
 
+    @Override
     public int size()
     // Returns the number of elements on this list.
     {
         return numElements;
     }
 
+    @Override
     public boolean contains(T element)
     // Returns true if this list contains an element e such that
     // e.equals(element); otherwise, returns false.
@@ -91,6 +95,7 @@ public class ArrayUnsortedList<T> implements ListInterface<T> {
         return found;
     }
 
+    @Override
     public T get(T element)
     // Returns an element e from this list such that e.equals(element);
     // if no such element exists, returns null.
@@ -102,15 +107,17 @@ public class ArrayUnsortedList<T> implements ListInterface<T> {
             return null;
     }
 
+    @Override
     public String toString()
     // Returns a nicely formatted string that represents this list.
     {
-        String listString = "List:\n";
+        String listString = "List: ";
         for (int i = 0; i < numElements; i++)
-            listString = listString + "  " + list[i] + "\n";
-        return listString;
+            listString = String.format("%s%s, ", listString, this.list[i]);
+        return listString.substring(0, listString.length()-2);
     }
 
+    @Override
     public void reset()
     // Initializes current position for an iteration through this list,
     // to the first element on this list.
@@ -118,6 +125,7 @@ public class ArrayUnsortedList<T> implements ListInterface<T> {
         currentPos = 0;
     }
 
+    @Override
     public T getNext()
     // Preconditions: The list is not empty
     //                The list has been reset
@@ -141,6 +149,7 @@ public class ArrayUnsortedList<T> implements ListInterface<T> {
         for (int i = 0; i < this.numElements; i++) {
             System.out.print(this.list[i] + " ");
         }
+        System.out.println();
     }
 
     public T getFirstElement() {

@@ -9,18 +9,23 @@ public class LLNode<T> {
         this.info = info;
         this.link = null;
     }
-    public void setInfo(T info) {
-        this.info = info;
-    }
+
     public T getInfo() {
         return info;
     }
-    public void setLink(LLNode<T> link) {
-        this.link = link;
+
+    public void setInfo(T info) {
+        this.info = info;
     }
 
     public LLNode<T> getLink() {
         return link;
+    }
+
+    public LLNode<T> setLink(LLNode<T> link) {
+        this.link = link;
+
+        return this;
     }
 
 }

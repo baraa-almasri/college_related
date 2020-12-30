@@ -19,6 +19,7 @@ public class ArrayListDemo {
         System.out.println();
         removeOddList(ul, 5);
         ul.print();
+        System.out.println(ul.toString());
     }
 
     public static <T> void printList(ArrayUnsortedList<T> list) {
