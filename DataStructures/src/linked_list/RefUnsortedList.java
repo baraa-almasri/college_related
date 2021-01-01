@@ -148,4 +148,66 @@ public class RefUnsortedList<T> implements ListInterface<T> {
             currentPos = currentPos.getLink();
         return next;
     }
+
+    public void print() {
+        LLNode<T> tmp = this.list;
+        while (tmp != null) {
+            System.out.print(tmp.getInfo() + " ");
+            tmp = tmp.getLink();
+        }
+        System.out.println();
+    }
+
+    public void removeFirst() {
+        if (this.list != null) {
+            this.list = this.list.getLink();
+            this.numElements--;
+        }
+    }
+
+    public void removeLast() {
+        LLNode<T> tmp = list;
+        while (tmp != null) {
+            if (tmp.getLink().getLink() == null) {
+                tmp.setLink(null);
+                this.numElements--;
+                return;
+            }
+            tmp = tmp.getLink();
+        }
+        /*
+        while (tmp.getLink() != null) {
+            tmp = tmp.getLink();
+        }
+        tmp.setLink(null);
+        */
+    }
+
+    public T getFirst() {
+        return this.list != null? this.list.getInfo(): null;
+    }
+
+    public T getLast() {
+        LLNode<T> tmp = list;
+        while (tmp != null) {
+            if (tmp.getLink() == null) {
+                return tmp.getInfo();
+            }
+            tmp = tmp.getLink();
+        }
+
+        return null;
+    }
+
+    public void addAfterLast(T element) {
+        LLNode<T> tmp = list;
+        while (tmp != null) {
+            if (tmp.getLink() == null) {
+                tmp.setLink(new LLNode<>(element));
+                this.numElements++;
+                return;
+            }
+            tmp = tmp.getLink();
+        }
+    }
 }
