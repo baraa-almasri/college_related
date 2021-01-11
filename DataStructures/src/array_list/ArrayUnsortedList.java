@@ -114,7 +114,7 @@ public class ArrayUnsortedList<T> implements ListInterface<T> {
         String listString = "List: ";
         for (int i = 0; i < numElements; i++)
             listString = String.format("%s%s, ", listString, this.list[i]);
-        return listString.substring(0, listString.length()-2);
+        return listString.substring(0, listString.length() - 2);
     }
 
     @Override
@@ -157,7 +157,7 @@ public class ArrayUnsortedList<T> implements ListInterface<T> {
     }
 
     public T getLastElement() {
-        return this.list[this.numElements-1];
+        return this.list[this.numElements - 1];
     }
 
     public void removeFirstElement() {
@@ -166,7 +166,15 @@ public class ArrayUnsortedList<T> implements ListInterface<T> {
     }
 
     public void removeAllMatches(T element) {
-        while (this.remove(element));
+        while (this.remove(element)) ;
+    }
+
+    public void clearList() {
+        final int s = this.size();
+
+        for (int i = 0; i < s; i++) {
+            this.remove(this.list[0]);
+        }
     }
 
 }
