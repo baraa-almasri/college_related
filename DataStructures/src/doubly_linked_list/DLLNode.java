@@ -36,7 +36,6 @@ public class DLLNode<T> {
     public DLLNode<T> getBack() {
         return back;
     }
-    
-    
-    
+
+
 }
