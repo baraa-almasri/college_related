@@ -49,4 +49,18 @@ public class ArraySortedList<T> extends ArrayUnsortedList<T>
         }
         return found;
     }
+
+    public void print() {
+        printRec(0);
+    }
+
+    private void printRec(int index) {
+        if (index > this.numElements-1) {
+            return;
+        } else {
+            System.out.println(this.list[index]);
+            printRec(index + 1);
+        }
+    }
+
 }

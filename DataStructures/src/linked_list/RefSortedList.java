@@ -50,4 +50,37 @@ public class RefSortedList<T extends Comparable<T>>
         }
         numElements++;
     }
+
+    public void delSpan(int i, int n) {
+        if (i > this.size()-1 || i+n > this.size()-1) {
+            System.out.println("index out of bound");
+            return;
+        }
+
+        this.reset();
+        LLNode<T> tmp = this.list;
+
+        for (int c = 0; c < i; c++) {
+            tmp = tmp.getLink();
+        }
+
+        for (int c = i; c <= n+1; c++) {
+            this.remove(tmp.getInfo());
+            tmp = tmp.getLink();
+        }
+
+
+    }
+
+    public void evenUp() {
+        LLNode<Integer> tmp = (LLNode<Integer>) this.list;
+
+        while (tmp != null) {
+            if (tmp.getInfo() % 2 != 0) {
+                tmp.setInfo(tmp.getInfo()+1);
+            }
+            tmp = tmp.getLink();
+        }
+
+    }
 }

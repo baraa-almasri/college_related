@@ -6,6 +6,8 @@
 
 package linked_list;
 
+import javax.print.attribute.standard.NumberOfDocuments;
+
 /**
  * @author lab1257-15
  */
@@ -149,14 +151,7 @@ public class RefUnsortedList<T> implements ListInterface<T> {
         return next;
     }
 
-    public void print() {
-        LLNode<T> tmp = this.list;
-        while (tmp != null) {
-            System.out.print(tmp.getInfo() + " ");
-            tmp = tmp.getLink();
-        }
-        System.out.println();
-    }
+
 
     public void removeFirst() {
         if (this.list != null) {
@@ -210,4 +205,131 @@ public class RefUnsortedList<T> implements ListInterface<T> {
             tmp = tmp.getLink();
         }
     }
+
+    public void removeFirstNItems(int n) {
+        if (this.numElements < n) {
+            System.out.println("can't remove elements");
+            return;
+        }
+
+        this.reset();
+        T tmp = this.getNext();
+
+        for (int i = 0; i < n; i++) {
+            this.remove(tmp);
+            tmp = this.getNext();
+        }
+
+    }
+
+
+    public void printFirstNth(int n) {
+        if (this.numElements < n) {
+            System.out.println("can't remove elements");
+            return;
+        }
+
+        this.reset();
+        T tmp = this.getNext();
+        for (int i = 1; i <= n; i++) {
+            System.out.println(tmp);
+            tmp = this.getNext();
+        }
+
+    }
+
+    public void delete2ndHalf() {
+        if (this.list == null) {
+            System.out.println("empty list");
+            return;
+        }
+
+        LLNode<T> tmp = this.list;
+        int halfElements = this.size()/2;
+
+        for (int i = 0; i < halfElements-1; i++) {
+            tmp = tmp.getLink();
+        }
+
+        tmp.setLink(null);
+
+    }
+
+    public void delFirstEven() {
+        this.reset();
+        T tmp = this.list.getInfo();
+
+        for (int i = 0; i < this.size(); i++) {
+            if ((int)tmp % 2 == 0) {
+                this.remove(tmp);
+                return;
+            }
+            tmp = this.getNext();
+        }
+    }
+
+    public void delNodeAt(int i) {
+        if (i > this.size()-1) {
+            System.out.println("index out of bound");
+            return;
+        }
+
+        this.reset();
+        LLNode<T> tmp = this.list;
+
+        for (int c = 0; c < i-1; c++) {
+            tmp = tmp.getLink();
+        }
+
+        this.remove(tmp.getInfo());
+    }
+
+    public void addAt(int i, T e) {
+        if (i > this.size()-1) {
+            System.out.println("index out of bound");
+            return;
+        }
+
+        this.reset();
+        LLNode<T> tmp = this.list;
+
+        for (int c = 0; c < i-1; c++) {
+            tmp = tmp.getLink();
+        }
+
+        LLNode<T> newNode = new LLNode<>(e);
+        newNode.setLink(tmp.getLink());
+
+        tmp.setLink(newNode);
+
+        newNode = null;
+
+    }
+
+    public int getSum() {
+        return getSumRecursive((LLNode<Integer>) this.list);
+    }
+
+    private int getSumRecursive(LLNode<Integer> node) {
+        if (node == null) {
+            return 0;
+        } else {
+            return node.getInfo() + getSumRecursive(node.getLink());
+        }
+
+    }
+
+    public void print() {
+        printRec(this.list);
+    }
+
+    public void printRec(LLNode<T> node) {
+        if (node == null) {
+            return;
+        } else {
+            System.out.println(node.getInfo());
+            printRec(node.getLink());
+        }
+    }
+
 }
